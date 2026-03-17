@@ -40,3 +40,6 @@ group by entity_id, DATE(created_at)
 HAVING distance_from_last > 10 ) as night_move 
 on day_static.entity_id = night_move.entity_id and day_static.date_day=night_move.as date_day) as result """
     return query
+
+def vis():
+    return """SELECT entity_id,initial_lat,initial_lon,last_known_lat,last_known_lon FROM targets"""
