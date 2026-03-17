@@ -1,0 +1,29 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: digital_hunter
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 20s
+      timeout: 15s
+      retries: 3
+      start_period: 20s
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./students_part_2/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+  api:
+    build: ./analyze-service
+    container_name: api
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
