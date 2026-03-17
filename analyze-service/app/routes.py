@@ -40,9 +40,10 @@ def strange_movement(conn: MySQLConnection = Depends(get_connection)):
     
 
 @router.get('/points_visualization',status_code=200)
-def strange_movement(conn: MySQLConnection = Depends(get_connection)):
+def visualization(conn: MySQLConnection = Depends(get_connection)):
     try:
-        result = execute_query(conn,identification_strange_movement())
+        result = execute_query(conn,vis())
+        
     except Exception as e:
         raise HTTPException(status_code=400,detail=e)
 
