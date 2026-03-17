@@ -3,7 +3,7 @@ from mysql.connector import MySQLConnection
 import os 
 
 mysql_host = os.getenv("MYSQL_HOST",'mysql')
-mysql_port = os.getenv("MYSQL_PORT",'3306')
+mysql_port = int(os.getenv("MYSQL_PORT",'3306'))
 mysql_user = os.getenv("MYSQL_USER",'root')
 mysql_password = os.getenv("MYSQL_PASSWORD",'root')
 
