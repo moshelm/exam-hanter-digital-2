@@ -18,7 +18,7 @@ def quality_targets_alert(conn: MySQLConnection = Depends(get_connection)):
 @router.get('/process_intel_sources',status_code=200)
 def intel_sources(conn: MySQLConnection = Depends(get_connection)):
     try:
-        return execute_query(conn,process_intel_sources())
+        return {'result':execute_query(conn,process_intel_sources())}
     except Exception as e:
         raise HTTPException(status_code=400,detail=e)
     
@@ -26,7 +26,7 @@ def intel_sources(conn: MySQLConnection = Depends(get_connection)):
 @router.get('/detection_new_targets',status_code=200)
 def new_targets(conn: MySQLConnection = Depends(get_connection)):
     try:
-        return execute_query(conn,detection_new_targets())
+        return {'result':execute_query(conn,detection_new_targets())}
     except Exception as e:
         raise HTTPException(status_code=400,detail=e)
     
@@ -34,8 +34,18 @@ def new_targets(conn: MySQLConnection = Depends(get_connection)):
 @router.get('/identification_strange_movement',status_code=200)
 def strange_movement(conn: MySQLConnection = Depends(get_connection)):
     try:
-        return execute_query(conn,identification_strange_movement())
+        return {'result':execute_query(conn,identification_strange_movement())}
     except Exception as e:
         raise HTTPException(status_code=400,detail=e)
+    
+
+@router.get('/points_visualization',status_code=200)
+def strange_movement(conn: MySQLConnection = Depends(get_connection)):
+    try:
+        result = execute_query(conn,identification_strange_movement())
+    except Exception as e:
+        raise HTTPException(status_code=400,detail=e)
+
+
     
 
